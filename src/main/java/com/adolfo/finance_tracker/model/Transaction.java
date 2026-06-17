@@ -1,4 +1,4 @@
-package com.adolfo.finance_tracker;
+package com.adolfo.finance_tracker.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
