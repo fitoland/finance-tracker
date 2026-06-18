@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/financetracker
     username: postgres
-    password: password
+    password: Adolfito7
   jpa:
     open-in-view: false
     hibernate:
