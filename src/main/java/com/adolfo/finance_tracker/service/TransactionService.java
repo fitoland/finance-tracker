@@ -2,6 +2,7 @@ package com.adolfo.finance_tracker.service;
 
 import com.adolfo.finance_tracker.dto.TransactionRequest;
 import com.adolfo.finance_tracker.dto.TransactionResponse;
+import com.adolfo.finance_tracker.exception.ResourceNotFoundException;
 import com.adolfo.finance_tracker.model.Category;
 import com.adolfo.finance_tracker.model.Transaction;
 import com.adolfo.finance_tracker.repository.CategoryRepository;
@@ -20,7 +21,7 @@ public class TransactionService {
 
     public TransactionResponse create(TransactionRequest transactionRequest){
         Category category = categoryRepository.findById(transactionRequest.categoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         Transaction transaction = new Transaction();
         transaction.setAmount(transactionRequest.amount());
@@ -47,16 +48,16 @@ public class TransactionService {
 
     public TransactionResponse findById(Long id){
         Transaction transaction = transactionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found"));
         return toResponse(transaction);
     }
 
     public TransactionResponse update(Long id, TransactionRequest transactionRequest){
         Transaction transaction = transactionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Transaction not found"));
 
         Category category = categoryRepository.findById(transactionRequest.categoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         transaction.setAmount(transactionRequest.amount());
         transaction.setDescription(transactionRequest.description());

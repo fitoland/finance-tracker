@@ -3,6 +3,7 @@ package com.adolfo.finance_tracker.controller;
 import com.adolfo.finance_tracker.dto.TransactionRequest;
 import com.adolfo.finance_tracker.dto.TransactionResponse;
 import com.adolfo.finance_tracker.service.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    public TransactionResponse create(@RequestBody TransactionRequest transactionRequest){
+    public TransactionResponse create(@Valid @RequestBody TransactionRequest transactionRequest){
         return transactionService.create(transactionRequest);
     }
 
@@ -30,7 +31,7 @@ public class TransactionController {
     }
 
     @PutMapping("/{id}")
-    public TransactionResponse update(@PathVariable Long id, @RequestBody TransactionRequest transactionRequest){
+    public TransactionResponse update(@PathVariable Long id, @Valid @RequestBody TransactionRequest transactionRequest){
         return transactionService.update(id, transactionRequest);
     }
 

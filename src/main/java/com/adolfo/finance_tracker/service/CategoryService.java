@@ -1,5 +1,6 @@
 package com.adolfo.finance_tracker.service;
 
+import com.adolfo.finance_tracker.exception.ResourceNotFoundException;
 import com.adolfo.finance_tracker.model.Category;
 import com.adolfo.finance_tracker.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class CategoryService {
 
     public Category findById(Long id){
        return categoryRepository.findById(id)
-               .orElseThrow(() -> new RuntimeException("Category not found"));
+               .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
     }
 
     public Category save(Category category){
@@ -33,7 +34,7 @@ public class CategoryService {
 
     public Category update(Long id, Category category){
         Category aux = categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         aux.setDescription(category.getDescription());
         aux.setName(category.getName());
